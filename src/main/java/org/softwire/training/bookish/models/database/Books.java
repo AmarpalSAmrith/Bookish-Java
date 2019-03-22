@@ -1,6 +1,6 @@
 package org.softwire.training.bookish.models.database;
 
-public class Book {
+public class Books {
 
     String id;
     String title;
