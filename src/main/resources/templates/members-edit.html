@@ -6,12 +6,12 @@
 
 <head>
     <title>Bookish - Members</title>
-    <link rel="shortcut icon" href="/images/book.png" />
+    <link rel="shortcut icon" href="/images/book.png"/>
     <link rel="stylesheet" href="/styles/bootstrap.css"/>
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
     <link rel="stylesheet" href="/styles/about.css"/>
-    <link rel="stylesheet" href="/styles/Members.css"/>
+    <link rel="stylesheet" href="/styles/books.css"/>
 </head>
 <body>
 <div class="container">
@@ -19,24 +19,51 @@
         <!-- This element is replaced by the HTML in fragments/navbar.html -->
     </div>
 
-        <div class="edit-form">
-            <form th:action="@{/members/edit-member/edited}" method="post">
-                <input type="hidden" name="id" th:value="${model.member.id}">
-                <div>
-                    <label for="firstName">First Name</label>
-                    <input id="firstName"type="text" name="firstName" th:value="${model.member.firstName}">
-                </div>
+    <div class="edit-form">
+        <form th:action="@{/members/edit-member/edited}" method="post">
+
+            <input type="hidden" name="id" th:value="${model.member.id}">
+
+            <div>
+                <label>First Name</label>
+                <input type="text" name="firstName" th:value="${model.member.firstName}">
+            </div>
+            <div>
+                <label>Middle Name</label>
                 <input type="text" name="middleName" th:value="${model.member.middleName}">
+            </div>
+            <div>
+                <label>Surname</label>
                 <input type="text" name="surname" th:value="${model.member.surname}">
+            </div>
+            <div>
+                <label>Birth Date</label>
                 <input type="text" name="birthDate" th:value="${model.member.birthDate}">
+            </div>
+            <div>
+                <label>Gender</label>
                 <input type="text" name="gender" th:value="${model.member.gender}">
+            </div>
+            <div>
+                <label>Address Line 1</label>
                 <input type="text" name="addressLine1" th:value="${model.member.addressLine1}">
+            </div>
+            <div>
+                <label>Address Line 2</label>
                 <input type="text" name="addressLine2" th:value="${model.member.addressLine2}">
+            </div>
+            <div>
+                <label>City</label>
                 <input type="text" name="city" th:value="${model.member.city}">
+            </div>
+            <div>
+                <label>Post Code</label>
                 <input type="text" name="postCode" th:value="${model.member.postCode}">
-                <input type="submit" value="Update Member" />
-            </form>
-        </div>
+            </div>
+            <input type="submit" value="Update Member"/>
+            <a href="/members"> Cancel </a>
+        </form>
+    </div>
 
 </div>
 </body>
