@@ -6,21 +6,72 @@
     <head>
         <title>Bookish - Books</title>
 
+        <link rel="stylesheet" href="/styles/bootstrap.css"/>
         <link rel="stylesheet" href="/styles/general.css"/>
         <link rel="stylesheet" href="/styles/navbar.css"/>
         <link rel="stylesheet" href="/styles/about.css"/>
+        <link rel="stylesheet" href="/styles/books.css"/>
     </head>
         <body>
              <div th:replace="fragments/navbar :: navbar">
                 <!-- This element is replaced by the HTML in fragments/navbar.html -->
              </div>
 
-            <div class="container">
-                <div class="jumbotron">
-                    <h1>Bookish</h1>
+             <div class="container">
+                 <h1>Bookish</h1>
+                 <p class="lead">Welcome to the books page</p>
 
-                    <p class="lead">Welcome to the books page</p>
-                </div>
-            </div>
+                 <section class="allbooks-section">
+                     <div class="allbooks-container">
+                        <table class="allbooks really-allbooks table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                        <div>ID</div>
+                                    </th>
+                                    <th>
+                                        Title
+                                        <div>Title</div>
+                                    </th>
+                                    <th>
+                                        Author
+                                        <div>Author</div>
+                                    </th>
+                                    <th>
+                                        ISBN
+                                        <div>ISBN</div>
+                                    </th>
+                                    <th>
+                                        Genre
+                                        <div>Genre</div>
+                                    </th>
+                                    <th>
+                                        Age Rating
+                                        <div>Age Rating</div>
+                                    </th>
+                                    <th>
+                                        Copies Available
+                                        <div>Copies Available</div>
+                                    </th>
+                                    <th> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="book:${model.books}">
+                                    <td th:text="${book.id}"></td>
+                                    <td th:text="${book.title}"></td>
+                                    <td th:text="${book.author}"></td>
+                                    <td th:text="${book.isbn}"></td>
+                                    <td th:text="${book.genre}"></td>
+                                    <td th:text="${book.ageRating}"></td>
+                                    <td th:text="${book.numberOfCopies}"></td>
+                                    <td><button class="editbook"><span>Edit</span></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                     </div>
+                 </section>
+             </div>
         </body>
 </html>

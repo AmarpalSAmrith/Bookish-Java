@@ -1,0 +1,42 @@
+.allbooks-section {
+    position: relative;
+    border-top: 50px solid #f43e1e;
+}
+
+.allbooks-container {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.allbooks{
+    table-position: center;
+}
+
+.allbooks thead {
+    background-color: #f43e1e;
+    color: white;
+}
+
+.allbooks th {
+    height: 0;
+    line-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: transparent;
+    border: none;
+    white-space: nowrap;
+}
+
+.allbooks th div{
+    position: absolute;
+    top: -35px;
+    background: transparent;
+    color: #fff;
+    line-height: normal;
+}
+.allbooks.really-allbooks tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.allbooks.really-allbooks tr:nth-child(odd) {
+    background-color: #dddddd;
+}

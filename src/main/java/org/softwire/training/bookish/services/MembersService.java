@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class MembersService extends DatabaseService {
-    public List<Members> getAllMemebers() {
+    public List<Members> getAllMembers() {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM members")
                         .mapToBean(Members.class)
