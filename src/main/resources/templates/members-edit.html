@@ -22,7 +22,10 @@
         <div class="edit-form">
             <form th:action="@{/members/edit-member/edited}" method="post">
                 <input type="hidden" name="id" th:value="${model.member.id}">
-                <input type="text" name="firstName" th:value="${model.member.firstName}">
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input id="firstName"type="text" name="firstName" th:value="${model.member.firstName}">
+                </div>
                 <input type="text" name="middleName" th:value="${model.member.middleName}">
                 <input type="text" name="surname" th:value="${model.member.surname}">
                 <input type="text" name="birthDate" th:value="${model.member.birthDate}">
