@@ -4,6 +4,7 @@ import org.softwire.training.bookish.models.database.Books;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService extends DatabaseService {
@@ -12,6 +13,15 @@ public class BookService extends DatabaseService {
                 handle.createQuery("SELECT * FROM books")
                         .mapToBean(Books.class)
                         .list()
+        );
+    }
+
+    public Optional<Books> getSingleBook(int id) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM books WHERE id = :id")
+                        .bind("id",id)
+                        .mapToBean(Books.class)
+                        .findFirst()
         );
     }
 
@@ -37,11 +47,11 @@ public class BookService extends DatabaseService {
         );
     }
 
-    public void updateBook(Books books, int bookId) {
+    public void updateBook(Books books) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE books SET title = :title, author = :author, isbn = :isbn, genre = :genre, age_rating = :ageRating, number_of_copies = :numberOfCopies " +
                                          "WHERE id = :id")
-                        .bind("id", bookId)
+                        .bind("id", books.getId())
                         .bind("title", books.getTitle())
                         .bind("author", books.getAuthor())
                         .bind("isbn", books.getIsbn())
