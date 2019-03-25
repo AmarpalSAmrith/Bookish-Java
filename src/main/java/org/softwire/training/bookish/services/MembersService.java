@@ -5,6 +5,7 @@ import org.softwire.training.bookish.models.database.Members;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MembersService extends DatabaseService {
@@ -13,6 +14,14 @@ public class MembersService extends DatabaseService {
                 handle.createQuery("SELECT * FROM members")
                         .mapToBean(Members.class)
                         .list()
+        );
+    }
+    public Optional<Members> getSingleMembers(int id) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM members WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Members.class)
+                        .findFirst()
         );
     }
 
@@ -40,12 +49,12 @@ public class MembersService extends DatabaseService {
                         .execute()
         );
     }
-    public void updateMember(Members member, int memberId) {
+    public void updateMember(Members member) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE members SET first_name = :firstName, middle_name = :middleName, " +
                         "surname = :surname, birth_date = :birthDate, gender = :gender, address_line1 = :addressLine1, " +
                         "address_line2 = :addressLine2, city = :city, post_code = :postCode WHERE id = :id")
-                        .bind("id", memberId)
+                        .bind("id", member.getId())
                         .bind("firstName", member.getFirstName())
                         .bind("middleName", member.getMiddleName())
                         .bind("surname", member.getSurname())

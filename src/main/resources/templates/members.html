@@ -20,6 +20,61 @@
         <h1>Bookish</h1>
 
         <p class="lead">Welcome to the members page</p>
+
+        <section class="allbooks-section">
+            <div class="allbooks-container">
+                <table class="allbooks really-allbooks table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>
+                            ID
+                            <div>ID</div>
+                        </th>
+                        <th>
+                            Title
+                            <div>Title</div>
+                        </th>
+                        <th>
+                            Author
+                            <div>Author</div>
+                        </th>
+                        <th>
+                            ISBN
+                            <div>ISBN</div>
+                        </th>
+                        <th>
+                            Genre
+                            <div>Genre</div>
+                        </th>
+                        <th>
+                            Age Rating
+                            <div>Age Rating</div>
+                        </th>
+                        <th>
+                            Copies Available
+                            <div>Copies Available</div>
+                        </th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="member:${model.members}">
+                        <td th:text="${member.id}"></td>
+                        <td th:text="${member.firstName}"></td>
+                        <td th:text="${member.middleName}"></td>
+                        <td th:text="${member.surname}"></td>
+                        <td th:text="${member.birthDate}"></td>
+                        <td th:text="${member.gender}"></td>
+                        <td th:text="${member.addressLine1}"></td>
+                        <td th:text="${member.addressLine2}"></td>
+                        <td th:text="${member.city}"></td>
+                        <td th:text="${member.postCode}"></td>
+                        <td> <a th:href="'/members/members-edit/' + ${member.id}"><button class="editmember"><span>Edit</span></button></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
 </div>
 </body>

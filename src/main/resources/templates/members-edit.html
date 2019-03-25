@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.EditMemberPageModel"-->
+
+<head>
+    <title>Bookish - Members</title>
+    <link rel="shortcut icon" href="/images/book.png" />
+    <link rel="stylesheet" href="/styles/bootstrap.css"/>
+    <link rel="stylesheet" href="/styles/general.css"/>
+    <link rel="stylesheet" href="/styles/navbar.css"/>
+    <link rel="stylesheet" href="/styles/about.css"/>
+    <link rel="stylesheet" href="/styles/Members.css"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar">
+        <!-- This element is replaced by the HTML in fragments/navbar.html -->
+    </div>
+
+        <div class="edit-form">
+            <form th:action="@{/members/edit-member/edited}" method="post">
+                <input type="hidden" name="id" th:value="${model.member.id}">
+                <input type="text" name="firstName" th:value="${model.member.firstName}">
+                <input type="text" name="middleName" th:value="${model.member.middleName}">
+                <input type="text" name="surname" th:value="${model.member.surname}">
+                <input type="text" name="birthDate" th:value="${model.member.birthDate}">
+                <input type="text" name="gender" th:value="${model.member.gender}">
+                <input type="text" name="addressLine1" th:value="${model.member.addressLine1}">
+                <input type="text" name="addressLine2" th:value="${model.member.addressLine2}">
+                <input type="text" name="city" th:value="${model.member.city}">
+                <input type="text" name="postCode" th:value="${model.member.postCode}">
+                <input type="submit" value="Update Member" />
+            </form>
+        </div>
+
+</div>
+</body>
+</html>

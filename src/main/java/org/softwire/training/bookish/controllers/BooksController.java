@@ -36,7 +36,7 @@ public class BooksController {
     }
 
     @RequestMapping("/books-edit/{id}")
-    ModelAndView addBooks(@PathVariable("id") Integer bookId) {
+    ModelAndView editBooks(@PathVariable("id") Integer bookId) {
 
         Optional<Books> book = bookService.getSingleBook(bookId);
 
