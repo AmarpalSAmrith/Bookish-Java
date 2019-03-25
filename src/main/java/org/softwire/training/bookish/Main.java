@@ -1,7 +1,7 @@
 package org.softwire.training.bookish;
 
 import org.jdbi.v3.core.Jdbi;
-import org.softwire.training.bookish.models.database.Book;
+import org.softwire.training.bookish.models.database.Books;
 
 import java.sql.*;
 import java.util.List;
@@ -61,13 +61,13 @@ public class Main {
         Jdbi jdbi = Jdbi.create(connectionString);
 
         String query = "SELECT * FROM bookish.books ORDER BY books.title ASC";
-        List<Book> books = jdbi.withHandle(handle ->
+        List<Books> books = jdbi.withHandle(handle ->
                 handle.createQuery(query)
-                        .mapToBean(Book.class)
+                        .mapToBean(Books.class)
                         .list()
         );
 
-        for (Book book : books) {
+        for (Books book : books) {
             System.out.println(book.getTitle());
         }
     }

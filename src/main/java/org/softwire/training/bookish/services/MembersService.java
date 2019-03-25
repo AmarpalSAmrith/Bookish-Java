@@ -42,8 +42,9 @@ public class MembersService extends DatabaseService {
     }
     public void updateMember(Members member, int memberId) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE members SET first_name = :firstName, middle_name = :middleName, surname = :surname, birth_date = :birthDate, gender = :gender, address_line1 = :addressLine1, address_line2 = :addressLine2, city = :city, post_code = :postCode" +
-                        "WHERE id = :id")
+                handle.createUpdate("UPDATE members SET first_name = :firstName, middle_name = :middleName, " +
+                        "surname = :surname, birth_date = :birthDate, gender = :gender, address_line1 = :addressLine1, " +
+                        "address_line2 = :addressLine2, city = :city, post_code = :postCode WHERE id = :id")
                         .bind("id", memberId)
                         .bind("firstName", member.getFirstName())
                         .bind("middleName", member.getMiddleName())

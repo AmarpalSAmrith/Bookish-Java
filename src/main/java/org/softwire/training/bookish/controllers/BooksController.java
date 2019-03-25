@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping ("/members")
-public class MembersController {
+@RequestMapping ("/books")
+public class BooksController {
 
     @RequestMapping("")
-    ModelAndView members (){
-        return new ModelAndView("members");
+    ModelAndView books (){
+        return new ModelAndView("books");
     }
+
 }
