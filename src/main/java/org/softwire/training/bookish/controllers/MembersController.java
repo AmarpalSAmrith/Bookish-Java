@@ -10,6 +10,8 @@ public class MembersController {
 
     @RequestMapping("")
     ModelAndView members (){
+        
+
         return new ModelAndView("members");
     }
 }
