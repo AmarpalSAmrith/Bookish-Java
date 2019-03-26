@@ -1,4 +1,4 @@
-package org.softwire.training.bookish.models.page;
+package org.softwire.training.bookish.models.page.books;
 
 import org.softwire.training.bookish.models.database.Books;
 

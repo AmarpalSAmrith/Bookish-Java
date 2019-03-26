@@ -1,8 +1,8 @@
 package org.softwire.training.bookish.controllers;
 
 import org.softwire.training.bookish.models.database.Books;
-import org.softwire.training.bookish.models.page.BooksPageModel;
-import org.softwire.training.bookish.models.page.EditBookPageModel;
+import org.softwire.training.bookish.models.page.books.BooksPageModel;
+import org.softwire.training.bookish.models.page.books.EditBookPageModel;
 import org.softwire.training.bookish.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,7 @@ public class BooksController {
         if (book.isPresent()) {
             EditBookPageModel editBookPageModel = new EditBookPageModel();
             editBookPageModel.setBook(book.get());
-            return new ModelAndView("books-edit", "model", editBookPageModel);
+            return new ModelAndView("books/books-edit", "model", editBookPageModel);
         } else {
             return books();
         }
