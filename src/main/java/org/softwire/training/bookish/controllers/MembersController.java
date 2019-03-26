@@ -64,6 +64,11 @@ public class MembersController {
         return new RedirectView("/members");
     }
     @RequestMapping("/members-add")
+    ModelAndView addMember() {
+        return new ModelAndView("members/members-add");
+
+    }
+    @RequestMapping("/members-add/added")
     RedirectView addMember(@ModelAttribute Members member) {
 
         membersService.addMember(member);
