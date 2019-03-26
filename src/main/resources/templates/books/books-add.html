@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.books.BooksPageModel"-->
 
 <head>
     <title>Bookish | Add Books</title>
@@ -20,7 +19,57 @@
     </script>
 
 </head>
-<body>
 
-</body>
+    <body>
+        <div th:replace="fragments/navbar :: navbar">
+            <!-- This element is replaced by the HTML in fragments/navbar.html -->
+        </div>
+
+        <form th:action = "@{/books/books-add/added}" method="POST">
+            <div class="add-book-row">
+                <label>
+                    <span>Title </span>
+                    <input type="text" name="title">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Author </span>
+                    <input type="text" name="author">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>ISBN </span>
+                    <input type="text" name="isbn">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Genre </span>
+                    <input type="text" name="genre">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Age Rating </span>
+                    <input type="number" name="ageRating">
+                </label>
+            </div>
+            <div class="add-book-row">
+                <label>
+                    <span>Number of Copies </span>
+                    <input type="number" name="numberOfCopies">
+                </label>
+            </div>
+            <input type="submit" value="Add Book"/>
+            <a href="/books"> Cancel </a>
+        </form>
+
+
+    </body>
+
+<footer>
+    <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>
+</footer>
 </html>

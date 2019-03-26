@@ -65,7 +65,7 @@ public class BooksController {
 
     @RequestMapping("/books-add")
     ModelAndView addBook() {
-        return new ModelAndView("books-add.html");
+        return new ModelAndView("books/books-add");
     }
 
     @RequestMapping("/books-add/added")
