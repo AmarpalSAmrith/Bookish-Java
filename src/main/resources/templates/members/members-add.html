@@ -26,6 +26,68 @@
                 <!-- This element is replaced by the HTML in fragments/navbar.html -->
             </div>
 
+            <form th:action = "@{/members/members-add/added}" method="POST">
+                <div class="add-member-row">
+                    <label>
+                        <span>First Name </span>
+                        <input type="text" name="firstName">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Middle Name </span>
+                        <input type="text" name="middleName">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Surname </span>
+                        <input type="text" name="surname">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Birth Date </span>
+                        <input type="date" name="birthDate">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Gender </span>
+                        <input type="radio" name="gender" value="M"> Male<br>
+                        <input type="radio" name="gender" value="F"> Female<br>
+                        <input type="radio" name="gender" value="N/A"> Other
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Address Line 1 </span>
+                        <input type="text" name="addressLine1">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Address Line 2 </span>
+                        <input type="text" name="addressLine2">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>City </span>
+                        <input type="text" name="city">
+                    </label>
+                </div>
+                <div class="add-member-row">
+                    <label>
+                        <span>Post Code </span>
+                        <input type="text" name="postCode">
+                    </label>
+                </div>
+                <input type="submit" value="Add Member"/>
+                <a href="/members"> Cancel </a>
+            </form>
+
+
         </body>
     <footer>
         <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>
