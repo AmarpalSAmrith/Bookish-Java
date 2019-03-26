@@ -29,8 +29,14 @@ public class MembersController {
     }
 
     @RequestMapping("")
-    ModelAndView members() {
-        List<Members> allMembers = membersService.getAllMembers();
+    ModelAndView members(@RequestParam("search") String search) {
+
+        List<Members> allMembers;
+        if (search == null) {
+            allMembers = membersService.getAllMembers();
+        } else {
+            allMembers = membersService.getMembersThatMatch(search);
+        }
 
         MembersPageModel membersPageModel = new MembersPageModel();
         membersPageModel.setMembers(allMembers);

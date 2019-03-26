@@ -16,6 +16,7 @@ public class MembersService extends DatabaseService {
                         .list()
         );
     }
+
     public Optional<Members> getSingleMembers(int id) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM members WHERE id = :id AND applicable = 1")
@@ -28,7 +29,7 @@ public class MembersService extends DatabaseService {
     public void addMember(Members member) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("INSERT INTO members (first_name, middle_name, surname, birth_date, gender, address_line1, address_line2, city, post_code, applicable) " +
-                                         "VALUES (:firstName, :middleName, :surname, :birthDate, :gender, :addressLine1, :addressLine2, :city, :postCode, 1)")
+                        "VALUES (:firstName, :middleName, :surname, :birthDate, :gender, :addressLine1, :addressLine2, :city, :postCode, 1)")
                         .bind("firstName", member.getFirstName())
                         .bind("middleName", member.getMiddleName())
                         .bind("surname", member.getSurname())
@@ -49,6 +50,7 @@ public class MembersService extends DatabaseService {
                         .execute()
         );
     }
+
     public void updateMember(Members member) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE members SET first_name = :firstName, middle_name = :middleName, " +
@@ -65,6 +67,24 @@ public class MembersService extends DatabaseService {
                         .bind("city", member.getCity())
                         .bind("postCode", member.getPostCode())
                         .execute()
+        );
+    }
+
+    public List<Members> getMembersThatMatch(String search) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM members WHERE " +
+                        "first_name = :search AND " +
+                        "middle_name = :search AND " +
+                        "surname = :search AND " +
+                        "birth_date = :search AND " +
+                        "address_line1 = :search AND " +
+                        "address_line2 = :search AND " +
+                        "city = :search AND " +
+                        "post_code = :search")
+
+                        .bind("search", search)
+                        .mapToBean(Members.class)
+                        .list()
         );
     }
 }
