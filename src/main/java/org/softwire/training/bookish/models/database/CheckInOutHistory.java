@@ -1,19 +1,21 @@
 package org.softwire.training.bookish.models.database;
 
+import org.jdbi.v3.core.mapper.Nested;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 public class CheckInOutHistory {
+
     int id;
-    int memberId;
-    int bookId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate checkOutDate;
     int daysUntilDueBack;
     boolean returned;
     String returnCondition;
     boolean applicable;
+    Books book;
+    Members member;
 
     public boolean isApplicable() {
         return applicable;
@@ -29,22 +31,6 @@ public class CheckInOutHistory {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
-    public int getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
     }
 
     public LocalDate getCheckOutDate() {
@@ -77,5 +63,23 @@ public class CheckInOutHistory {
 
     public void setReturnCondition(String returnCondition) {
         this.returnCondition = returnCondition;
+    }
+
+    @Nested("book")
+    public Books getBook() {
+        return book;
+    }
+
+    public void setBook(Books book) {
+        this.book = book;
+    }
+
+    @Nested("members")
+    public Members getMember() {
+        return member;
+    }
+
+    public void setMember(Members member) {
+        this.member = member;
     }
 }

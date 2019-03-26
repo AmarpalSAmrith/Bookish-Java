@@ -49,7 +49,7 @@ public class CheckInOutHistoryController {
             return records();
         }
     }
-    @RequestMapping ("/edit-record/edited")
+    @RequestMapping ("/record-edit/edited")
     RedirectView handleEditForm(@ModelAttribute CheckInOutHistory records)   {
         checkInOutHistoryService.updateRecord(records);
         return new RedirectView("/check-in-out-history");
@@ -62,6 +62,10 @@ public class CheckInOutHistoryController {
         return new RedirectView("/check-in-out-history");
     }
     @RequestMapping("/record-add")
+    ModelAndView addRecord(){
+        return new ModelAndView("checkInOutHistory/records");
+    }
+    @RequestMapping("/record-add/added")
     RedirectView addRecord(@ModelAttribute CheckInOutHistory record) {
 
         checkInOutHistoryService.addRecord(record);

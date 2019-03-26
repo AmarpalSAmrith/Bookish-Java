@@ -66,7 +66,8 @@
                             Copies Available
                             <div>Copies Available</div>
                         </th>
-                        <th></th>
+                        <th> </th>
+                        <th> </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,6 +82,7 @@
                         <td><a th:href="'/books/books-edit/' + ${book.id}">
                             <button class="editbook"><span>Edit</span></button>
                         </a></td>
+                        <td> <a th:href="'/books/books-delete/' + ${book.id}"><button class="editbook"><span>Delete</span></button></a></td>
                     </tr>
                     </tbody>
                 </table>
