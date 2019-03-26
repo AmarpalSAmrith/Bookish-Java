@@ -10,7 +10,7 @@ import java.util.Optional;
 public class BookService extends DatabaseService {
     public List<Books> getAllBooks() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM books")
+                handle.createQuery("SELECT * FROM books WHERE applicable = 1")
                         .mapToBean(Books.class)
                         .list()
         );
@@ -18,7 +18,7 @@ public class BookService extends DatabaseService {
 
     public Optional<Books> getSingleBook(int id) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM books WHERE id = :id")
+                handle.createQuery("SELECT * FROM books WHERE id = :id AND applicable = 1")
                         .bind("id",id)
                         .mapToBean(Books.class)
                         .findFirst()
@@ -27,8 +27,8 @@ public class BookService extends DatabaseService {
 
     public void addBook(Books books) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO books (title, author, isbn, genre, age_rating, number_of_copies) " +
-                        "VALUES (:title, :author, :isbn, :genre, :ageRating, :numberOfCopies)")
+                handle.createUpdate("INSERT INTO books (title, author, isbn, genre, age_rating, number_of_copies, applicable) " +
+                        "VALUES (:title, :author, :isbn, :genre, :ageRating, :numberOfCopies, 1)")
                         .bind("title", books.getTitle())
                         .bind("author", books.getAuthor())
                         .bind("isbn", books.getIsbn())
@@ -41,7 +41,7 @@ public class BookService extends DatabaseService {
 
     public void deleteBook(int bookId) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("DELETE FROM books WHERE id = :id")
+                handle.createUpdate("UPDATE books SET applicable = 0 WHERE id=:id")
                         .bind("id", bookId)
                         .execute()
         );

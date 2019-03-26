@@ -9,6 +9,15 @@ public class Books {
     String genre;
     int ageRating;
     int numberOfCopies;
+    boolean applicable;
+
+    public boolean isApplicable() {
+        return applicable;
+    }
+
+    public void setApplicable(boolean applicable) {
+        this.applicable = applicable;
+    }
 
     public int getId() {
         return id;

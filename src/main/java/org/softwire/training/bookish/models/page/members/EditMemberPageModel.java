@@ -4,7 +4,7 @@ import org.softwire.training.bookish.models.database.Members;
 
 public class EditMemberPageModel {
 
-    Members member;
+    private Members member;
 
     public Members getMember() {return member; }
 

@@ -1,6 +1,7 @@
 package org.softwire.training.bookish.controllers;
 
 import org.softwire.training.bookish.models.database.Books;
+import org.softwire.training.bookish.models.database.Members;
 import org.softwire.training.bookish.models.page.books.BooksPageModel;
 import org.softwire.training.bookish.models.page.books.EditBookPageModel;
 import org.softwire.training.bookish.services.BookService;
@@ -54,5 +55,18 @@ public class BooksController {
         bookService.updateBook(books);
         return new RedirectView("/books");
     }
+    @RequestMapping("/books-delete/{id}")
+    RedirectView deleteBook(@PathVariable("id") Integer bookId) {
 
+        bookService.deleteBook(bookId);
+
+        return new RedirectView("/books");
+    }
+    @RequestMapping("/books-add")
+    RedirectView addBook(@ModelAttribute Books book) {
+
+        bookService.addBook(book);
+
+        return new RedirectView("/books");
+    }
 }

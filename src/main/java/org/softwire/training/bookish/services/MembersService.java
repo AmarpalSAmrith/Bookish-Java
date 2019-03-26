@@ -11,14 +11,14 @@ import java.util.Optional;
 public class MembersService extends DatabaseService {
     public List<Members> getAllMembers() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM members")
+                handle.createQuery("SELECT * FROM members WHERE applicable = 1")
                         .mapToBean(Members.class)
                         .list()
         );
     }
     public Optional<Members> getSingleMembers(int id) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM members WHERE id = :id")
+                handle.createQuery("SELECT * FROM members WHERE id = :id AND applicable = 1")
                         .bind("id", id)
                         .mapToBean(Members.class)
                         .findFirst()
@@ -27,8 +27,8 @@ public class MembersService extends DatabaseService {
 
     public void addMember(Members member) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("INSERT INTO members (first_name, middle_name, surname, birth_date, gender, address_line1, address_line2, city, post_code) " +
-                                         "VALUES (:firstName, :middleName, :surname, :birthDate, :gender, :addressLine1, :addressLine2, :city, :postCode)")
+                handle.createUpdate("INSERT INTO members (first_name, middle_name, surname, birth_date, gender, address_line1, address_line2, city, post_code, applicable) " +
+                                         "VALUES (:firstName, :middleName, :surname, :birthDate, :gender, :addressLine1, :addressLine2, :city, :postCode, 1)")
                         .bind("firstName", member.getFirstName())
                         .bind("middleName", member.getMiddleName())
                         .bind("surname", member.getSurname())
@@ -44,7 +44,7 @@ public class MembersService extends DatabaseService {
 
     public void deleteMember(int memberId) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("DELETE FROM members WHERE id = :id")
+                handle.createUpdate("UPDATE members SET applicable = 0 WHERE id=:id")
                         .bind("id", memberId)
                         .execute()
         );

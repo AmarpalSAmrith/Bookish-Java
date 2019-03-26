@@ -16,6 +16,15 @@ public class Members {
     String addressLine2;
     String city;
     String postCode;
+    boolean applicable;
+
+    public boolean isApplicable() {
+        return applicable;
+    }
+
+    public void setApplicable(boolean applicable) {
+        this.applicable = applicable;
+    }
 
     public int getId() {
         return id;

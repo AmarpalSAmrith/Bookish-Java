@@ -1,5 +1,6 @@
 package org.softwire.training.bookish.controllers;
 
+import org.softwire.training.bookish.models.database.Books;
 import org.softwire.training.bookish.models.database.CheckInOutHistory;
 import org.softwire.training.bookish.models.database.Members;
 import org.softwire.training.bookish.models.page.checkInOutHistory.CheckInOutHistoryPageModel;
@@ -32,7 +33,7 @@ public class CheckInOutHistoryController {
         CheckInOutHistoryPageModel checkInOutHistoryPageModel = new CheckInOutHistoryPageModel();
         checkInOutHistoryPageModel.setRecords(allRecords);
 
-        return new ModelAndView("records","model",checkInOutHistoryPageModel);
+        return new ModelAndView("checkInOutHistory/records","model",checkInOutHistoryPageModel);
     }
 
     @RequestMapping("/records-edit/{id}")
@@ -53,5 +54,18 @@ public class CheckInOutHistoryController {
         checkInOutHistoryService.updateRecord(records);
         return new RedirectView("/check-in-out-history");
     }
+    @RequestMapping("/record-delete/{id}")
+    RedirectView deleteTechnology(@PathVariable("id") Integer recordId) {
 
+        checkInOutHistoryService.deleteRecord(recordId);
+
+        return new RedirectView("/check-in-out-history");
+    }
+    @RequestMapping("/record-add")
+    RedirectView addRecord(@ModelAttribute CheckInOutHistory record) {
+
+        checkInOutHistoryService.addRecord(record);
+
+        return new RedirectView("/check-in-out-history");
+    }
 }

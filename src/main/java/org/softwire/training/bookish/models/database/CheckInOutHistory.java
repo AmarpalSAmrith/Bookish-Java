@@ -13,6 +13,15 @@ public class CheckInOutHistory {
     int daysUntilDueBack;
     boolean returned;
     String returnCondition;
+    boolean applicable;
+
+    public boolean isApplicable() {
+        return applicable;
+    }
+
+    public void setApplicable(boolean applicable) {
+        this.applicable = applicable;
+    }
 
     public int getId() {
         return id;

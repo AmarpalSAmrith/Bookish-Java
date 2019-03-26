@@ -11,7 +11,7 @@ public class CheckInOutHistoryService extends DatabaseService {
 
     public List<CheckInOutHistory> getAllCheckInOutHistory() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM check_in_out_history")
+                handle.createQuery("SELECT * FROM check_in_out_history WHERE applicable = 1")
                         .mapToBean(CheckInOutHistory.class)
                         .list()
         );
@@ -19,7 +19,7 @@ public class CheckInOutHistoryService extends DatabaseService {
 
     public Optional<CheckInOutHistory> getSingleRecord(int id) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM check_in_out_history WHERE id = :id")
+                handle.createQuery("SELECT * FROM check_in_out_history WHERE id = :id AND applicable = 1")
                         .bind("id", id)
                         .mapToBean(CheckInOutHistory.class)
                         .findFirst()
@@ -29,8 +29,8 @@ public class CheckInOutHistoryService extends DatabaseService {
     public void addRecord(CheckInOutHistory record) {
         jdbi.useHandle(handle ->
                 handle.createUpdate("INSERT INTO check_in_out_history (memberId, bookId, checkOutDate, daysUntilDueBack, " +
-                                         "returned, returnCondition) " +
-                                         "VALUES (:memberId, :bookId, :checkOutDate, :daysUntilDueBack, :returned, :returnCondition)")
+                                         "returned, returnCondition, applicable) " +
+                                         "VALUES (:memberId, :bookId, :checkOutDate, :daysUntilDueBack, :returned, :returnCondition, 1)")
                         .bind("memberId", record.getMemberId())
                         .bind("bookId", record.getBookId())
                         .bind("checkOutDate", record.getCheckOutDate())
@@ -43,7 +43,7 @@ public class CheckInOutHistoryService extends DatabaseService {
 
     public void deleteRecord(int recordId) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("DELETE FROM check_in_out_history WHERE id = :id")
+                handle.createUpdate("UPDATE check_in_out_history SET applicable = 0 WHERE id = :id")
                         .bind("id", recordId)
                         .execute()
         );
