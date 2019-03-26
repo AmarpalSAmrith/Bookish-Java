@@ -31,7 +31,7 @@ public class BooksController {
         BooksPageModel booksPageModel = new BooksPageModel();
         booksPageModel.setBooks(allBooks);
 
-        return new ModelAndView("books", "model", booksPageModel);
+        return new ModelAndView("books/books", "model", booksPageModel);
 
     }
 
