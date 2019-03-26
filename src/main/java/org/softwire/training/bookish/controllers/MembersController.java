@@ -29,7 +29,7 @@ public class MembersController {
     }
 
     @RequestMapping("")
-    ModelAndView members(@RequestParam("search") String search) {
+    ModelAndView members(@RequestParam(value = "search", required = false) String search) {
 
         List<Members> allMembers;
         if (search == null) {
@@ -53,7 +53,7 @@ public class MembersController {
             editMemberPageModel.setMember(member.get());
             return new ModelAndView("members/members-edit", "model", editMemberPageModel);
         } else {
-            return members();
+            return members(null);
         }
     }
 

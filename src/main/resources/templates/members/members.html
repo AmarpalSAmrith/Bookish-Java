@@ -27,6 +27,11 @@
             <a href="/members/members-add"><button class="add-members-button"><span>Add Member</span></button></a>
         </div>
 
+        <div>
+            <input id="searchText" type="search" placeholder="Search..">
+            <button onclick="location.href = '/members?search=' + window.searchText.value;">Submit</button>
+        </div>
+
         <section class="allbooks-section">
             <div class="allbooks-container">
                 <table class="allbooks really-allbooks table table-bordered table-striped">
