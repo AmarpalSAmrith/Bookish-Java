@@ -2,7 +2,7 @@ package org.softwire.training.bookish.models.database;
 
 public class Books {
 
-    String id;
+    int id;
     String title;
     String author;
     String isbn;
@@ -10,7 +10,7 @@ public class Books {
     int ageRating;
     int numberOfCopies;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class Books {
         return numberOfCopies;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
