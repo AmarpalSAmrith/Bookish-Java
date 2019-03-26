@@ -11,7 +11,14 @@ public class CheckInOutHistoryService extends DatabaseService {
 
     public List<CheckInOutHistory> getAllCheckInOutHistory() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM check_in_out_history WHERE applicable = 1")
+                handle.createQuery("SELECT check_in_out_history.*, " +
+                        "books.title AS book_title, books.author AS book_author, books.genre AS book_genre,  " +
+                        "members.first_name AS members_first_name, members.middle_name AS members_middle_name, " +
+                        "members.surname AS members_surname, members.birth_date AS members_birth_date, members.post_code AS members_post_code " +
+                        "FROM check_in_out_history " +
+                        "JOIN books ON check_in_out_history.book_id = books.id " +
+                        "JOIN members ON check_in_out_history.member_id = members.id " +
+                        "WHERE check_in_out_history.applicable = 1")
                         .mapToBean(CheckInOutHistory.class)
                         .list()
         );
@@ -19,7 +26,14 @@ public class CheckInOutHistoryService extends DatabaseService {
 
     public Optional<CheckInOutHistory> getSingleRecord(int id) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM check_in_out_history WHERE id = :id AND applicable = 1")
+                handle.createQuery("SELECT check_in_out_history.*, " +
+                        "books.title AS book_title, books.author AS book_author, books.genre AS book_genre,  " +
+                        "members.first_name AS members_first_name, members.middle_name AS members_middle_name, " +
+                        "members.surname AS members_surname, members.birth_date AS members_birth_date, members.post_code AS members_post_code " +
+                        "FROM check_in_out_history " +
+                        "JOIN books ON check_in_out_history.book_id = books.id " +
+                        "JOIN members ON check_in_out_history.member_id = members.id " +
+                        "WHERE check_in_out_history.applicable = 1 AND check_in_out_history.id = :id")
                         .bind("id", id)
                         .mapToBean(CheckInOutHistory.class)
                         .findFirst()
@@ -31,8 +45,8 @@ public class CheckInOutHistoryService extends DatabaseService {
                 handle.createUpdate("INSERT INTO check_in_out_history (memberId, bookId, checkOutDate, daysUntilDueBack, " +
                                          "returned, returnCondition, applicable) " +
                                          "VALUES (:memberId, :bookId, :checkOutDate, :daysUntilDueBack, :returned, :returnCondition, 1)")
-                        .bind("memberId", record.getMemberId())
-                        .bind("bookId", record.getBookId())
+                        .bind("memberId", record.getMember().getId())
+                        .bind("bookId", record.getBook().getId())
                         .bind("checkOutDate", record.getCheckOutDate())
                         .bind("daysUntilDueBack", record.getDaysUntilDueBack())
                         .bind("returned", record.isReturned())
@@ -54,8 +68,8 @@ public class CheckInOutHistoryService extends DatabaseService {
                 handle.createUpdate("UPDATE check_in_out_history SET memberId = :memberId, bookId = :bookId, checkOutDate = :checkOutDate, " +
                                          "daysUntilDueBack = :daysUntilDueBack, returned = :returned, returnCondition = :returnCondition " +
                                          "WHERE id = :id")
-                        .bind("memberId", record.getMemberId())
-                        .bind("bookId", record.getBookId())
+                        .bind("memberId", record.getMember().getId())
+                        .bind("bookId", record.getBook().getId())
                         .bind("checkOutDate", record.getCheckOutDate())
                         .bind("daysUntilDueBack", record.getDaysUntilDueBack())
                         .bind("returned", record.isReturned())

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
-<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.books.CheckInOutHistoryPageModel"-->
+<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.checkInOutHistory.CheckInOutHistoryPageModel"-->
 
     <head>
         <title>records</title>
@@ -26,9 +26,9 @@
 
             //TODO Finish this
 
-            <section class="allrecords-section">
-                <div class="allrecords-container">
-                    <table class="allrecords">
+            <section class="allbooks-section">
+                <div class="allbooks-container">
+                    <table class="allbooks really-allbooks table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>
@@ -36,64 +36,48 @@
                                 <div>ID</div>
                             </th>
                             <th>
-                                First Name
-                                <div>First Name</div>
+                                Member
+                                <div>Member</div>
                             </th>
                             <th>
-                                Middle Name
-                                <div>Middle Name</div>
+                                Book
+                                <div>Book</div>
                             </th>
                             <th>
-                                Surname
-                                <div>Surname</div>
+                                Check Out Date
+                                <div>Check Out Date</div>
                             </th>
                             <th>
-                                Birth Date
-                                <div>Birth Date</div>
+                                Days Until Due Back
+                                <div>Days Until Due Back</div>
                             </th>
                             <th>
-                                Gender
-                                <div>Gender</div>
+                                Returned
+                                <div>Returned</div>
                             </th>
                             <th>
-                                Address Line 1
-                                <div>Address Line 1</div>
-                            </th>
-                            <th>
-                                Address Line 2
-                                <div>Address Line 2</div>
-                            </th>
-                            <th>
-                                City
-                                <div>City</div>
-                            </th>
-                            <th>
-                                Post Code
-                                <div>Post Code</div>
+                                Return Condition
+                                <div>Return Condition</div>
                             </th>
                             <th>
                                 <div> </div>
                             </th>
-
                             <th>
                                 <div> </div>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="member:${model.members}">
-                            <td th:text="${member.id}"></td>
-                            <td th:text="${member.firstName}"></td>
-                            <td th:text="${member.middleName}"></td>
-                            <td th:text="${member.surname}"></td>
-                            <td th:text="${member.birthDate}"></td>
-                            <td th:text="${member.gender}"></td>
-                            <td th:text="${member.addressLine1}"></td>
-                            <td th:text="${member.addressLine2}"></td>
-                            <td th:text="${member.city}"></td>
-                            <td th:text="${member.postCode}"></td>
-                            <td> <a th:href="'/members/members-edit/' + ${member.id}"><button class="editmember"><span>Edit</span></button></a></td>
-                            <td> <a th:href="'/members/members-delete/' + ${member.id}"><button class="editmember"><span>Delete</span></button></a></td>
+                        <tr th:each="record:${model.records}">
+                            <td th:text="${record.id}"></td>
+                            <td th:text="${record.member.firstName} + ' ' + ${record.member.middleName} + ' ' + ${record.member.surname}"></td>
+                            <td th:text="${record.book.title} + ', ' + ${record.book.author}"></td>
+                            <td th:text="${record.checkOutDate}"></td>
+                            <td th:text="${record.daysUntilDueBack}"></td>
+                            <td th:text="${record.returned}"></td>
+                            <td th:text="${record.returnCondition}"></td>
+                            <td> <a th:href="'/check-in-out-history/records-edit/' + ${record.id}"><button class="editrecord"><span>Edit</span></button></a></td>
+                            <td> <a th:href="'/check-in-out-history/record-delete/' + ${record.id}"><button class="deleterecord"><span>Delete</span></button></a></td>
                         </tr>
                         </tbody>
                     </table>
