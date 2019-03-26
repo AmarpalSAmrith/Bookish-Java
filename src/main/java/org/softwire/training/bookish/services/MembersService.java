@@ -73,14 +73,14 @@ public class MembersService extends DatabaseService {
     public List<Members> getMembersThatMatch(String search) {
         return jdbi.withHandle(handle ->
                 handle.createQuery("SELECT * FROM members WHERE " +
-                        "first_name = :search AND " +
-                        "middle_name = :search AND " +
-                        "surname = :search AND " +
-                        "birth_date = :search AND " +
-                        "address_line1 = :search AND " +
-                        "address_line2 = :search AND " +
-                        "city = :search AND " +
-                        "post_code = :search")
+                        "first_name LIKE %:search% OR " +
+                        "middle_name LIKE %:search% OR " +
+                        "surname LIKE %:search% OR " +
+                        "birth_date LIKE %:search% OR " +
+                        "address_line1 LIKE %:search% OR " +
+                        "address_line2 LIKE %:search% OR " +
+                        "city LIKE %:search% OR " +
+                        "post_code = %:search%")
 
                         .bind("search", search)
                         .mapToBean(Members.class)
