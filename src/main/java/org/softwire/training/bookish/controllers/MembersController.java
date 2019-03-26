@@ -33,7 +33,7 @@ public class MembersController {
         MembersPageModel membersPageModel = new MembersPageModel();
         membersPageModel.setMembers(allMembers);
 
-        return new ModelAndView("members", "model", membersPageModel);
+        return new ModelAndView("members/members", "model", membersPageModel);
     }
     @RequestMapping("/members-edit/{id}")
     ModelAndView editMembers(@PathVariable("id") Integer memberId) {
@@ -43,7 +43,7 @@ public class MembersController {
         if (member.isPresent()) {
             EditMemberPageModel editMemberPageModel = new EditMemberPageModel();
             editMemberPageModel.setMember(member.get());
-            return new ModelAndView("members-edit", "model", editMemberPageModel);
+            return new ModelAndView("members/members-edit", "model", editMemberPageModel);
         } else {
             return members();
         }
