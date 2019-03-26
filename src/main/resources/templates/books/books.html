@@ -4,13 +4,21 @@
 <!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.books.BooksPageModel"-->
 
 <head>
-    <title>Bookish - Books</title>
+    <title>Bookish | Books</title>
     <link rel="shortcut icon" href="/images/book.png"/>
     <link rel="stylesheet" href="/styles/bootstrap.css"/>
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
     <link rel="stylesheet" href="/styles/about.css"/>
     <link rel="stylesheet" href="/styles/books.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function setActiveItemInNav(id) {
+            $('#' + id).addClass("active");
+        }
+
+        $(document).ready(function() { setActiveItemInNav("nav-books"); });
+    </script>
 </head>
 <body>
 <div th:replace="fragments/navbar :: navbar">
@@ -20,6 +28,10 @@
     <div class="jumbotron">
         <h1>Bookish</h1>
         <p class="lead">Welcome to the books page</p>
+
+        <div>
+            <button class="add-books-button"><span>Add Book</span></button>
+        </div>
 
         <section class="allbooks-section">
             <div class="allbooks-container">

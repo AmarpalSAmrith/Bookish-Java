@@ -40,3 +40,10 @@
 .allbooks.really-allbooks tr:nth-child(odd) {
     background-color: #dddddd;
 }
+
+.add-books-button {
+    position: relative;
+    alignment: right;
+    padding-right: 25px;
+
+}
