@@ -1,8 +1,6 @@
 package org.softwire.training.bookish.controllers;
 
-import org.softwire.training.bookish.models.database.Books;
 import org.softwire.training.bookish.models.database.Members;
-import org.softwire.training.bookish.models.page.EditBookPageModel;
 import org.softwire.training.bookish.models.page.EditMemberPageModel;
 import org.softwire.training.bookish.models.page.MembersPageModel;
 import org.softwire.training.bookish.services.MembersService;
