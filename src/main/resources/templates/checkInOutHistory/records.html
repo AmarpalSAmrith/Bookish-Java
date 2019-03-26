@@ -25,62 +25,61 @@
             </div>
 
             <div class="container">
-            //TODO Finish this
-
-            <section class="allbooks-section">
-                <div class="allbooks-container">
-                    <table class="allbooks really-allbooks table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>
-                                ID
-                                <div>ID</div>
-                            </th>
-                            <th>
-                                Member
-                                <div>Member</div>
-                            </th>
-                            <th>
-                                Book
-                                <div>Book</div>
-                            </th>
-                            <th>
-                                Check Out Date
-                                <div>Check Out Date</div>
-                            </th>
-                            <th>
-                                Days Until Due Back
-                                <div>Days Until Due Back</div>
-                            </th>
-                            <th>
-                                Returned
-                                <div>Returned</div>
-                            </th>
-                            <th>
-                                Return Condition
-                                <div>Return Condition</div>
-                            </th>
-                            <th>
-                                <div> </div>
-                            </th>
-                            <th>
-                                <div> </div>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="record:${model.records}">
-                            <td th:text="${record.id}"></td>
-                            <td th:text="${record.member.firstName} + ' ' + ${record.member.middleName} + ' ' + ${record.member.surname}"></td>
-                            <td th:text="${record.book.title} + ', ' + ${record.book.author}"></td>
-                            <td th:text="${record.checkOutDate}"></td>
-                            <td th:text="${record.daysUntilDueBack}"></td>
-                            <td th:text="${record.returned}"></td>
-                            <td th:text="${record.returnCondition}"></td>
-                            <td> <a th:href="'/check-in-out-history/records-edit/' + ${record.id}"><button class="editrecord"><span>Edit</span></button></a></td>
-                            <td> <a th:href="'/check-in-out-history/record-delete/' + ${record.id}"><button class="deleterecord"><span>Delete</span></button></a></td>
-                        </tr>
-                        </tbody>
+                <div class="jumbotron">
+                    <section class="allbooks-section">
+                    <div class="allbooks-container">
+                        <table class="allbooks really-allbooks table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>
+                                    ID
+                                    <div>ID</div>
+                                </th>
+                                <th>
+                                    Member
+                                    <div>Member</div>
+                                </th>
+                                <th>
+                                    Book
+                                    <div>Book</div>
+                                </th>
+                                <th>
+                                    Check Out Date
+                                    <div>Check Out Date</div>
+                                </th>
+                                <th>
+                                    Days Until Due Back
+                                    <div>Days Until Due Back</div>
+                                </th>
+                                <th>
+                                    Returned
+                                    <div>Returned</div>
+                                </th>
+                                <th>
+                                    Return Condition
+                                    <div>Return Condition</div>
+                                </th>
+                                <th>
+                                    <div> </div>
+                                </th>
+                                <th>
+                                    <div> </div>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="record:${model.records}">
+                                <td th:text="${record.id}"></td>
+                                <td th:text="${record.member.firstName} + ' ' + ${record.member.middleName} + ' ' + ${record.member.surname}"></td>
+                                <td th:text="${record.book.title} + ', ' + ${record.book.author}"></td>
+                                <td th:text="${record.checkOutDate}"></td>
+                                <td th:text="${record.daysUntilDueBack}"></td>
+                                <td th:text="${record.returned}"></td>
+                                <td th:text="${record.returnCondition}"></td>
+                                <td> <a th:href="'/check-in-out-history/records-edit/' + ${record.id}"><button class="editrecord"><span>Edit</span></button></a></td>
+                                <td> <a th:href="'/check-in-out-history/record-delete/' + ${record.id}"><button class="deleterecord"><span>Delete</span></button></a></td>
+                            </tr>
+                            </tbody>
                     </table>
                 </div>
             </section>
