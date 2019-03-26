@@ -5,6 +5,7 @@ import org.softwire.training.bookish.models.database.CheckInOutHistory;
 import org.softwire.training.bookish.models.database.Members;
 import org.softwire.training.bookish.models.page.checkInOutHistory.CheckInOutHistoryPageModel;
 import org.softwire.training.bookish.models.page.checkInOutHistory.EditCheckInOutHistoryPageModel;
+import org.softwire.training.bookish.models.page.checkInOutHistory.MemberCheckInOutHistoryPageModel;
 import org.softwire.training.bookish.services.CheckInOutHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,5 +72,15 @@ public class CheckInOutHistoryController {
         checkInOutHistoryService.addRecord(record);
 
         return new RedirectView("/check-in-out-history");
+    }
+    @RequestMapping("/record-view/{id}")
+    ModelAndView viewrecords (@PathVariable("id") Integer memberId){
+
+        List<CheckInOutHistory> allRecordsForMember = checkInOutHistoryService.getRecordsForMember(memberId);
+
+        MemberCheckInOutHistoryPageModel memberCheckInOutHistoryPageModel = new MemberCheckInOutHistoryPageModel();
+        memberCheckInOutHistoryPageModel.setMemberRecords(allRecordsForMember);
+
+        return new ModelAndView("checkInOutHistory/checkInOut", "model", memberCheckInOutHistoryPageModel);
     }
 }

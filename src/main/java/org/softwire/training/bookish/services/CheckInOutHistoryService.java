@@ -77,4 +77,23 @@ public class CheckInOutHistoryService extends DatabaseService {
                         .execute()
         );
     }
+    public List<CheckInOutHistory> getRecordsForMember(int memberid) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT check_in_out_history.id AS 'Check out ID', " +
+                        "CONCAT(members.first_name, ' ', middle_name, ' ', surname) AS 'Name', " +
+                        "floor(datediff(CURDATE(),birth_date) / 365) AS 'Age', " +
+                        "title AS 'Book Title', DATE_FORMAT(check_out_date,'%d/%m/%Y') AS 'Date Checked out', " +
+                        "DATE_FORMAT(DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY),'%d/%m/%Y') AS 'Date Due Back', " +
+                            "IF(returned = 1, 'Returned', " +
+                            "IF(DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY) = CURDATE(),'Due Today'," +
+                            "IF(returned = 0 AND DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY) > CURDATE(), 'Not Due Yet', 'OverDue')))  AS 'Book Status' " +
+                        "FROM check_in_out_history " +
+                            "LEFT JOIN books ON books.id = check_in_out_history.book_id " +
+                            "LEFT JOIN members ON members.id = check_in_out_history.member_id " +
+                        "WHERE check_in_out_history.applicable = 1 AND member_id = :id")
+                        .bind("id", memberid)
+                        .mapToBean(CheckInOutHistory.class)
+                        .list()
+        );
+    }
 }

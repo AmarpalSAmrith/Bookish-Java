@@ -116,7 +116,7 @@
                         <td th:text="${member.postCode}"></td>
                         <td> <a th:href="'/members/members-edit/' + ${member.id}"><button class="editmember"><span>Edit</span></button></a></td>
                         <td> <a th:href="'/members/members-delete/' + ${member.id}"><button class="editmember"><span>Delete</span></button></a></td>
-                        <td> <a th:href="'/members/members-???/' + ${member.id}"><button class="editmember"><span>Check In/Out</span></button></a></td>
+                        <td> <a th:href="'/check-in-out-history/record-view/' + ${member.id}"><button class="editmember"><span>Check In/Out</span></button></a></td>
                     </tr>
                     </tbody>
                 </table>
