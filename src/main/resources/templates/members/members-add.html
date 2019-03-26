@@ -9,14 +9,14 @@
         <link rel="stylesheet" href="/styles/bootstrap.css"/>
         <link rel="stylesheet" href="/styles/general.css"/>
         <link rel="stylesheet" href="/styles/navbar.css"/>
-        <link rel="stylesheet" href="/styles/books.css"/>
+        <link rel="stylesheet" href="/styles/members.css"/>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script>
             function setActiveItemInNav(id) {
                 $('#' + id).addClass("active");
             }
 
-            $(document).ready(function() { setActiveItemInNav("nav-books"); });
+            $(document).ready(function() { setActiveItemInNav("nav-members"); });
         </script>
 
     </head>
@@ -25,6 +25,8 @@
             <div th:replace="fragments/navbar :: navbar">
                 <!-- This element is replaced by the HTML in fragments/navbar.html -->
             </div>
+
+            <div class="container">
 
             <form th:action = "@{/members/members-add/added}" method="POST">
                 <div class="add-member-row">
@@ -86,7 +88,7 @@
                 <input type="submit" value="Add Member"/>
                 <a href="/members"> Cancel </a>
             </form>
-
+            </div>
 
         </body>
     <footer>
