@@ -62,7 +62,13 @@ public class BooksController {
 
         return new RedirectView("/books");
     }
+
     @RequestMapping("/books-add")
+    ModelAndView addBook() {
+        return new ModelAndView("books-add.html");
+    }
+
+    @RequestMapping("/books-add/added")
     RedirectView addBook(@ModelAttribute Books book) {
 
         bookService.addBook(book);
