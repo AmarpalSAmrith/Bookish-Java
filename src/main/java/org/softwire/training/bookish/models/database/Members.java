@@ -1,5 +1,7 @@
 package org.softwire.training.bookish.models.database;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Members {
@@ -7,6 +9,7 @@ public class Members {
     String firstName;
     String middleName;
     String surname;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate birthDate;
     String gender;
     String addressLine1;
