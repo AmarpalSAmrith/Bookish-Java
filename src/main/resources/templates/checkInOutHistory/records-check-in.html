@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
-<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.checkInOutHistory.MemberCheckInOutHistoryPageModel"-->
+<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.checkInOutHistory.CheckInBookPageModel"-->
 
 <head>
     <meta charset="UTF-8">
@@ -32,32 +32,19 @@
     <div class="jumbotron">
         <div class="container">
             <!-- ADD FORM -->
-            <form th:action = "@{/check-in-out-history/record-add/added}" method="POST">
+            <form th:action = "@{/check-in-out-history/check-in/checkedin}" method="POST">
                 <div class="add-book-row">
                     <label>
-                        <span th:text="'Member: ' + ${model.member.firstName} + ' ' + ${model.member.middleName} + ' ' + ${model.member.surname}"></span>
-                        <input type="hidden" name="member.id" th:value="${model.member.id}">
+                        <input type="hidden" name="id" th:value="${model.record.id}">
                     </label>
                 </div>
                 <div class="add-book-row">
                     <label>
-                        <span>Book ID </span>
-                        <input type="text" name="book.id">
+                        <span>Return Condition (brief) </span>
+                        <input type="text" name="returnCondition">
                     </label>
                 </div>
-                <div class="add-book-row">
-                    <label>
-                        <span>Check Out Date </span>
-                        <input type="text" name="checkOutDate">
-                    </label>
-                </div>
-                <div class="add-book-row">
-                    <label>
-                        <span>Loan period (days) </span>
-                        <input type="text" name="daysUntilDueBack">
-                    </label>
-                </div>
-                <input type="submit" value="Add Book"/>
+                <input type="submit" value="Check In Book"/>
                 <a href="/check-in-out-history"> Cancel </a>
             </form>
 

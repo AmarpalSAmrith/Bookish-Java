@@ -111,7 +111,7 @@ public class CheckInOutHistoryService extends DatabaseService {
     }
     public void checkInRecord(CheckInOutHistory record) {
         jdbi.useHandle(handle ->
-                handle.createUpdate("UPDATE check_in_out_history SET returned = 1, returnCondition = :returnCondition " +
+                handle.createUpdate("UPDATE check_in_out_history SET returned = 1, return_condition = :returnCondition " +
                         "WHERE id = :id")
                         .bind("id", record.getId())
                         .bind("returnCondition", record.getReturnCondition())
