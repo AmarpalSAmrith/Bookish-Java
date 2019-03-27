@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
     <link rel="stylesheet" href="/styles/books.css"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
         function setActiveItemInNav(id) {
             $('#' + id).addClass("active");
         }
 
-        $(document).ready(function() { setActiveItemInNav("nav-books"); });
+        $(document).ready(function () {
+            setActiveItemInNav("nav-books");
+        });
     </script>
 </head>
 <body>
@@ -28,8 +31,21 @@
         <h1>The Library of Books and Stuff</h1>
         <p class="lead">Welcome to the books page</p>
 
-        <div>
-            <a href="/books/books-add"><button class="add-books-button"><span>Add Book</span></button></a>
+        <div class="list-buttons-container">
+            <div>
+                <a href="/books/books-add">
+                    <button class="add-books-button"><span>Add Book</span></button>
+                </a>
+            </div>
+            <div class="search-form-container">
+                <div>
+                    <input id="searchText" type="search" placeholder="Search..">
+                    <button onclick="location.href = '/books?search=' + window.searchText.value;">Submit</button>
+                </div>
+                <div>
+                    <button onclick="location.href = '/books'">Clear Search</button>
+                </div>
+            </div>
         </div>
 
         <table class="table table-responsive table-hover table-bordered">
@@ -43,8 +59,8 @@
                 <th>Genre</th>
                 <th>Age Rating</th>
                 <th>Copies Available</th>
-                <th> </th>
-                <th> </th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -57,9 +73,11 @@
                 <td th:text="${book.ageRating}"></td>
                 <td th:text="${book.numberOfCopies}"></td>
                 <td><a th:href="'/books/books-edit/' + ${book.id}">
-                    <button class="editbook"><span>Edit</span></button>
+                    <button class="editbookbutton"><span>Edit</span></button>
                 </a></td>
-                <td> <a th:href="'/books/books-delete/' + ${book.id}"><button class="editbook"><span>Delete</span></button></a></td>
+                <td><a th:href="'/books/books-delete/' + ${book.id}">
+                    <button class="editbookbutton"><span>Delete</span></button>
+                </a></td>
             </tr>
             </tbody>
         </table>

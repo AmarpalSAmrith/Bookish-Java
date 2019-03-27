@@ -1,5 +1,19 @@
+.list-buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.search-form-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
 .add-books-button {
-    background-color: #f4511e; /* Green */
+    background-color: #f4511e;
     border: none;
     border-radius: 5px;
     color: white;
@@ -10,7 +24,7 @@
     justify-content: right;
     font-size: 16px;
     margin: 4px 2px;
-    -webkit-transition-duration: 0.5s; /* Safari */
+    -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
     cursor: pointer;
 }
@@ -28,5 +42,9 @@
 
 .add-book-row {
     color: white;
+
+}
+
+.editbookbutton {
 
 }
