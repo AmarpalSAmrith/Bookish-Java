@@ -4,37 +4,36 @@
 
 <!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.books.EditBookPageModel"-->
 
-    <head>
-        <title>Bookish | Edit Books</title>
-        <link rel="shortcut icon" href="/images/book.png" />
-        <link rel="stylesheet" href="/styles/bootstrap.css"/>
-        <link rel="stylesheet" href="/styles/general.css"/>
-        <link rel="stylesheet" href="/styles/navbar.css"/>
-        <link rel="stylesheet" href="/styles/about.css"/>
-        <link rel="stylesheet" href="/styles/books.css"/>
-    </head>
-        <body>
-        <div class="container">
-            <div th:replace="fragments/navbar :: navbar">
-                <!-- This element is replaced by the HTML in fragments/navbar.html -->
-            </div>
+<head>
+    <title>Bookish | Edit Books</title>
+    <link rel="shortcut icon" href="/images/book.png" />
+    <link rel="stylesheet" href="/styles/bootstrap.css"/>
+    <link rel="stylesheet" href="/styles/general.css"/>
+    <link rel="stylesheet" href="/styles/navbar.css"/>
+    <link rel="stylesheet" href="/styles/books.css"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/navbar :: navbar">
+        <!-- This element is replaced by the HTML in fragments/navbar.html -->
+    </div>
 
-            <div class="edit-form">
-                <form th:action="@{/books/edit-book/edited}" method="post">
-                    <input type="hidden" name="id" th:value="${model.book.id}">
-                    <input type="text" name="author" th:value="${model.book.author}">
-                    <input type="text" name="title" th:value="${model.book.title}">
-                    <input type="text" name="isbn" th:value="${model.book.isbn}">
-                    <input type="text" name="genre" th:value="${model.book.genre}">
-                    <input type="text" name="ageRating" th:value="${model.book.ageRating}">
-                    <input type="text" name="numberOfCopies" th:value="${model.book.numberOfCopies}">
-                    <input type="submit" value="Update Book" />
-                </form>
-            </div>
+    <div class="edit-form">
+        <form th:action="@{/books/edit-book/edited}" method="post">
+            <input type="hidden" name="id" th:value="${model.book.id}">
+            <input type="text" name="author" th:value="${model.book.author}">
+            <input type="text" name="title" th:value="${model.book.title}">
+            <input type="text" name="isbn" th:value="${model.book.isbn}">
+            <input type="text" name="genre" th:value="${model.book.genre}">
+            <input type="text" name="ageRating" th:value="${model.book.ageRating}">
+            <input type="text" name="numberOfCopies" th:value="${model.book.numberOfCopies}">
+            <input type="submit" value="Update Book" />
+        </form>
+    </div>
 
-        </div>
-        </body>
-    <footer>
-        <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>
-    </footer>
+</div>
+</body>
+<footer>
+    <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>
+</footer>
 </html>

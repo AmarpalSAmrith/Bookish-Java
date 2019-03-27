@@ -1,12 +1,12 @@
 package org.softwire.training.bookish.controllers;
 
-import org.softwire.training.bookish.models.database.Books;
 import org.softwire.training.bookish.models.database.CheckInOutHistory;
 import org.softwire.training.bookish.models.database.Members;
 import org.softwire.training.bookish.models.page.checkInOutHistory.CheckInOutHistoryPageModel;
 import org.softwire.training.bookish.models.page.checkInOutHistory.EditCheckInOutHistoryPageModel;
 import org.softwire.training.bookish.models.page.checkInOutHistory.MemberCheckInOutHistoryPageModel;
 import org.softwire.training.bookish.services.CheckInOutHistoryService;
+import org.softwire.training.bookish.services.MembersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,10 +21,15 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/check-in-out-history")
 public class CheckInOutHistoryController {
+
     private final CheckInOutHistoryService checkInOutHistoryService;
+    private final MembersService membersService;
 
     @Autowired
-    public CheckInOutHistoryController (CheckInOutHistoryService checkInOutHistoryService) {this.checkInOutHistoryService = checkInOutHistoryService;}
+    public CheckInOutHistoryController(CheckInOutHistoryService checkInOutHistoryService, MembersService membersService) {
+        this.checkInOutHistoryService = checkInOutHistoryService;
+        this.membersService = membersService;
+    }
 
     @RequestMapping("")
     ModelAndView records (){
@@ -76,11 +81,17 @@ public class CheckInOutHistoryController {
     @RequestMapping("/record-view/{id}")
     ModelAndView viewrecords (@PathVariable("id") Integer memberId){
 
-        List<CheckInOutHistory> allRecordsForMember = checkInOutHistoryService.getRecordsForMember(memberId);
+        Optional<Members> member = membersService.getSingleMembers(memberId);
+        if (member.isPresent()) {
+            List<CheckInOutHistory> allRecordsForMember = checkInOutHistoryService.getRecordsForMember(memberId);
 
-        MemberCheckInOutHistoryPageModel memberCheckInOutHistoryPageModel = new MemberCheckInOutHistoryPageModel();
-        memberCheckInOutHistoryPageModel.setMemberRecords(allRecordsForMember);
+            MemberCheckInOutHistoryPageModel memberCheckInOutHistoryPageModel = new MemberCheckInOutHistoryPageModel();
+            memberCheckInOutHistoryPageModel.setMemberRecords(allRecordsForMember);
+            memberCheckInOutHistoryPageModel.setMember(member.get());
 
-        return new ModelAndView("checkInOutHistory/checkInOut", "model", memberCheckInOutHistoryPageModel);
+            return new ModelAndView("checkInOutHistory/checkInOut", "model", memberCheckInOutHistoryPageModel);
+        } else {
+            return records();
+        }
     }
 }

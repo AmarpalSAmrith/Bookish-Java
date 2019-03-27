@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/styles/bootstrap.css"/>
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
-    <link rel="stylesheet" href="/styles/about.css"/>
     <link rel="stylesheet" href="/styles/books.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
@@ -33,62 +32,39 @@
             <a href="/books/books-add"><button class="add-books-button"><span>Add Book</span></button></a>
         </div>
 
-        <section class="allbooks-section">
-            <div class="allbooks-container">
-                <table class="allbooks really-allbooks table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>
-                            ID
-                            <div>ID</div>
-                        </th>
-                        <th>
-                            Title
-                            <div>Title</div>
-                        </th>
-                        <th>
-                            Author
-                            <div>Author</div>
-                        </th>
-                        <th>
-                            ISBN
-                            <div>ISBN</div>
-                        </th>
-                        <th>
-                            Genre
-                            <div>Genre</div>
-                        </th>
-                        <th>
-                            Age Rating
-                            <div>Age Rating</div>
-                        </th>
-                        <th>
-                            Copies Available
-                            <div>Copies Available</div>
-                        </th>
-                        <th> </th>
-                        <th> </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="book:${model.books}">
-                        <td th:text="${book.id}"></td>
-                        <td th:text="${book.title}"></td>
-                        <td th:text="${book.author}"></td>
-                        <td th:text="${book.isbn}"></td>
-                        <td th:text="${book.genre}"></td>
-                        <td th:text="${book.ageRating}"></td>
-                        <td th:text="${book.numberOfCopies}"></td>
-                        <td><a th:href="'/books/books-edit/' + ${book.id}">
-                            <button class="editbook"><span>Edit</span></button>
-                        </a></td>
-                        <td> <a th:href="'/books/books-delete/' + ${book.id}"><button class="editbook"><span>Delete</span></button></a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        <table class="table table-responsive table-hover table-bordered">
+            <caption>List of Books in the Library</caption>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Genre</th>
+                <th>Age Rating</th>
+                <th>Copies Available</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book:${model.books}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.genre}"></td>
+                <td th:text="${book.ageRating}"></td>
+                <td th:text="${book.numberOfCopies}"></td>
+                <td><a th:href="'/books/books-edit/' + ${book.id}">
+                    <button class="editbook"><span>Edit</span></button>
+                </a></td>
+                <td> <a th:href="'/books/books-delete/' + ${book.id}"><button class="editbook"><span>Delete</span></button></a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
 </div>
 </body>
 <footer>
