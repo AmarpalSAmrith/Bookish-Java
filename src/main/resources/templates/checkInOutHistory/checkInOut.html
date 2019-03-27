@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/styles/bootstrap.css"/>
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
-    <link rel="stylesheet" href="/styles/books.css"/>
+    <link rel="stylesheet" href="/styles/checkinout.css"/>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
@@ -27,11 +27,9 @@
     <div th:replace="fragments/navbar :: navbar">
         <!-- This element is replaced by the HTML in fragments/navbar.html -->
     </div>
-
     <div class="container">
         <div class="jumbotron">
-            <div class="container">
-                <!-- ADD FORM -->
+            <div class="form-container">
                 <form th:action = "@{/check-in-out-history/record-add/added}" method="POST">
                     <div class="add-book-row">
                         <label>
@@ -63,37 +61,18 @@
 
             </div> <br>
             <!-- LIST Members books -->
-            <section th:if="${model.memberRecords.size() > 0}" class="allbooks-section">
-                <div class="allbooks-container">
-                    <table class="allbooks really-allbooks table table-bordered table-striped">
+            <section th:if="${model.memberRecords.size() > 0}">
+                <div class="list-records-container">
+                    <table class="table table-responsive table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>
-                                ID
-                                <div>ID</div>
-                            </th>
-                            <th>
-                                Member
-                                <div>Member</div>
-                            </th>
-                            <th>
-                                Book
-                                <div>Book</div>
-                            </th>
-                            <th>
-                                Check Out Date
-                                <div>Check Out Date</div>
-                            </th>
-                            <th>
-                                Date Due Back
-                                <div>Date Due Back</div>
-                            </th>
-                            <th>
-                                <div></div>
-                            </th>
-                            <th>
-                                <div></div>
-                            </th>
+                            <th>ID</th>
+                            <th>Member</th>
+                            <th>Book</th>
+                            <th>Check Out Date</th>
+                            <th>Date Due Back</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -120,4 +99,7 @@
         </div>
     </div>
 </body>
+<footer>
+    <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>
+</footer>
 </html>
