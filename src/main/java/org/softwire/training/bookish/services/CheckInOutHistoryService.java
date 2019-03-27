@@ -95,7 +95,11 @@ public class CheckInOutHistoryService extends DatabaseService {
     }
     public List<CheckInOutHistory> getRecordsThatMatch(String search) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM check_in_out_history " +
+                handle.createQuery("SELECT check_in_out_history.*, " +
+                        "books.title AS book_title, books.author AS book_author, books.genre AS book_genre,  " +
+                        "members.first_name AS members_first_name, members.middle_name AS members_middle_name, " +
+                        "members.surname AS members_surname, members.birth_date AS members_birth_date, members.post_code AS members_post_code " +
+                        "FROM check_in_out_history " +
                         "JOIN books ON check_in_out_history.book_id = books.id " +
                         "JOIN members ON check_in_out_history.member_id = members.id " +
                         "WHERE members.first_name LIKE CONCAT('%', :search '%') OR " +
