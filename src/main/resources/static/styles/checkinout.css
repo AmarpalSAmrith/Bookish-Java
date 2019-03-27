@@ -1,0 +1,28 @@
+.add-member-row label {
+    color: black;
+}
+
+.list-records-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.search-form-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.form-container {
+    margin-top: 15px;
+    background-color: #e9ecef;
+    width: fit-content;
+    display: flex;
+    text-align: right;
+    align-items: flex-end;
+    justify-content: left;
+    padding: 12px;
+
+}
