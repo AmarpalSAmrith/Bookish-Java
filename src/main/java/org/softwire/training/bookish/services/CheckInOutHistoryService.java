@@ -86,7 +86,7 @@ public class CheckInOutHistoryService extends DatabaseService {
                         "FROM check_in_out_history " +
                         "JOIN books ON check_in_out_history.book_id = books.id " +
                         "JOIN members ON check_in_out_history.member_id = members.id " +
-                        "WHERE check_in_out_history.applicable = 1 AND members.id = :id")
+                        "WHERE check_in_out_history.applicable = 1 AND members.id = :id AND DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY) > CURDATE()")
                         .bind("id", memberid)
                         .mapToBean(CheckInOutHistory.class)
                         .list()
