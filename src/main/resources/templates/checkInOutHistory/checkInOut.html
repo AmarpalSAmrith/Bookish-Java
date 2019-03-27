@@ -85,16 +85,8 @@
                                 <div>Check Out Date</div>
                             </th>
                             <th>
-                                Days Until Due Back
-                                <div>Days Until Due Back</div>
-                            </th>
-                            <th>
-                                Returned
-                                <div>Returned</div>
-                            </th>
-                            <th>
-                                Return Condition
-                                <div>Return Condition</div>
+                                Date Due Back
+                                <div>Date Due Back</div>
                             </th>
                             <th>
                                 <div></div>
@@ -109,10 +101,8 @@
                             <td th:text="${record.id}"></td>
                             <td th:text="${record.member.firstName} + ' ' + ${record.member.middleName} + ' ' + ${record.member.surname}"></td>
                             <td th:text="${record.book.title} + ', ' + ${record.book.author}"></td>
-                            <td th:text="${record.checkOutDate}"></td>
-                            <td th:text="${record.daysUntilDueBack}"></td>
-                            <td th:text="${record.returned}"></td>
-                            <td th:text="${record.returnCondition}"></td>
+                            <td th:text="${record.checkOutDate.format(model.dateTimeFormatter)}"></td>
+                            <td th:text="${record.checkOutDate.plusDays(record.daysUntilDueBack).format(model.dateTimeFormatter)}"></td>
                             <td><a th:href="'/check-in-out-history/records-edit/' + ${record.id}">
                                 <button class="editrecord"><span>Edit</span></button>
                             </a></td>

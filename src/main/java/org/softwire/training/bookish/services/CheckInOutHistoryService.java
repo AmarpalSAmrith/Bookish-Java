@@ -1,6 +1,7 @@
 package org.softwire.training.bookish.services;
 
 import org.softwire.training.bookish.models.database.CheckInOutHistory;
+import org.softwire.training.bookish.models.database.Members;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,6 +91,38 @@ public class CheckInOutHistoryService extends DatabaseService {
                         .bind("id", memberid)
                         .mapToBean(CheckInOutHistory.class)
                         .list()
+        );
+    }
+    public List<CheckInOutHistory> getRecordsThatMatch(String search) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM check_in_out_history " +
+                        "JOIN books ON check_in_out_history.book_id = books.id " +
+                        "JOIN members ON check_in_out_history.member_id = members.id " +
+                        "WHERE members.first_name LIKE CONCAT('%', :search '%') OR " +
+                        "members.middle_name LIKE CONCAT('%', :search, '%') OR " +
+                        "members.surname LIKE CONCAT('%', :search, '%') OR " +
+                        "members.birth_date LIKE CONCAT('%', :search, '%') OR " +
+                        "members.address_line1 LIKE CONCAT('%', :search, '%') OR " +
+                        "members.address_line2 LIKE CONCAT('%', :search, '%') OR " +
+                        "members.city LIKE CONCAT('%', :search, '%') OR " +
+                        "members.post_code = CONCAT('%', :search, '%') OR" +
+                        "books.title LIKE CONCAT('%', :search, '%') OR" +
+                        "books.author LIKE CONCAT('%', :search, '%') OR" +
+                        "books.isbn LIKE CONCAT('%', :search, '%') OR" +
+                        "books.genre LIKE CONCAT('%', :search, '%') OR" +
+                        "books.age_rating LIKE CONCAT('%', :search, '%')")
+
+                        .bind("search", search)
+                        .mapToBean(CheckInOutHistory.class)
+                        .list()
+        );
+    }
+    public void checkInRecord(CheckInOutHistory record) {
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE check_in_out_history SET returned = 1, returnCondition = :returnCondition " +
+                        "WHERE id = :id")
+                        .bind("returnCondition", record.getReturnCondition())
+                        .execute()
         );
     }
 }
