@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -33,9 +34,14 @@ public class CheckInOutHistoryController {
     }
 
     @RequestMapping("")
-    ModelAndView records (){
+    ModelAndView records (@RequestParam(value = "search", required = false) String search){
 
-        List<CheckInOutHistory> allRecords = checkInOutHistoryService.getAllCheckInOutHistory();
+        List<CheckInOutHistory> allRecords;
+        if (search == null) {
+            allRecords = checkInOutHistoryService.getAllCheckInOutHistory();
+        } else {
+            allRecords = checkInOutHistoryService.getRecordsThatMatch(search);
+        }
 
         CheckInOutHistoryPageModel checkInOutHistoryPageModel = new CheckInOutHistoryPageModel();
         checkInOutHistoryPageModel.setRecords(allRecords);
@@ -53,7 +59,7 @@ public class CheckInOutHistoryController {
             editCheckInOutHistoryPageModel.setRecord(record.get());
             return new ModelAndView("records-edit", "model", editCheckInOutHistoryPageModel);
         } else {
-            return records();
+            return records(null);
         }
     }
     @RequestMapping ("/record-edit/edited")
@@ -92,7 +98,7 @@ public class CheckInOutHistoryController {
 
             return new ModelAndView("checkInOutHistory/checkInOut", "model", memberCheckInOutHistoryPageModel);
         } else {
-            return records();
+            return records(null);
         }
     }
 
