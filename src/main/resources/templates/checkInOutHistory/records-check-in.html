@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<!--@thymesVar id="model" type="org.softwire.training.bookish.models.page.checkInOutHistory.MemberCheckInOutHistoryPageModel"-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Check In or Out</title>
+    <link rel="shortcut icon" href="/images/book.png"/>
+    <link rel="stylesheet" href="/styles/bootstrap.css"/>
+    <link rel="stylesheet" href="/styles/general.css"/>
+    <link rel="stylesheet" href="/styles/navbar.css"/>
+    <link rel="stylesheet" href="/styles/books.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function setActiveItemInNav(id) {
+            $('#' + id).addClass("active");
+        }
+
+        $(document).ready(function () {
+            setActiveItemInNav("nav-checkouts");
+        });
+    </script>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar">
+    <!-- This element is replaced by the HTML in fragments/navbar.html -->
+</div>
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <!-- ADD FORM -->
+            <form th:action = "@{/check-in-out-history/record-add/added}" method="POST">
+                <div class="add-book-row">
+                    <label>
+                        <span th:text="'Member: ' + ${model.member.firstName} + ' ' + ${model.member.middleName} + ' ' + ${model.member.surname}"></span>
+                        <input type="hidden" name="member.id" th:value="${model.member.id}">
+                    </label>
+                </div>
+                <div class="add-book-row">
+                    <label>
+                        <span>Book ID </span>
+                        <input type="text" name="book.id">
+                    </label>
+                </div>
+                <div class="add-book-row">
+                    <label>
+                        <span>Check Out Date </span>
+                        <input type="text" name="checkOutDate">
+                    </label>
+                </div>
+                <div class="add-book-row">
+                    <label>
+                        <span>Loan period (days) </span>
+                        <input type="text" name="daysUntilDueBack">
+                    </label>
+                </div>
+                <input type="submit" value="Add Book"/>
+                <a href="/check-in-out-history"> Cancel </a>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

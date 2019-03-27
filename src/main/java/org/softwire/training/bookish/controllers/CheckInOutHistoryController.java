@@ -79,7 +79,7 @@ public class CheckInOutHistoryController {
         return new RedirectView("/check-in-out-history");
     }
     @RequestMapping("/record-view/{id}")
-    ModelAndView viewrecords (@PathVariable("id") Integer memberId){
+    ModelAndView viewRecords(@PathVariable("id") Integer memberId){
 
         Optional<Members> member = membersService.getSingleMembers(memberId);
         if (member.isPresent()) {
@@ -93,5 +93,10 @@ public class CheckInOutHistoryController {
         } else {
             return records();
         }
+    }
+    @RequestMapping("/check-in")
+    ModelAndView checkInRecords (@ModelAttribute CheckInOutHistory record){
+        checkInOutHistoryService.checkInRecord(record);
+        return new ModelAndView("/checkInOutHistory");
     }
 }

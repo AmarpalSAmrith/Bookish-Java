@@ -101,16 +101,8 @@ public class CheckInOutHistoryService extends DatabaseService {
                         "WHERE members.first_name LIKE CONCAT('%', :search '%') OR " +
                         "members.middle_name LIKE CONCAT('%', :search, '%') OR " +
                         "members.surname LIKE CONCAT('%', :search, '%') OR " +
-                        "members.birth_date LIKE CONCAT('%', :search, '%') OR " +
-                        "members.address_line1 LIKE CONCAT('%', :search, '%') OR " +
-                        "members.address_line2 LIKE CONCAT('%', :search, '%') OR " +
-                        "members.city LIKE CONCAT('%', :search, '%') OR " +
-                        "members.post_code = CONCAT('%', :search, '%') OR" +
                         "books.title LIKE CONCAT('%', :search, '%') OR" +
-                        "books.author LIKE CONCAT('%', :search, '%') OR" +
-                        "books.isbn LIKE CONCAT('%', :search, '%') OR" +
-                        "books.genre LIKE CONCAT('%', :search, '%') OR" +
-                        "books.age_rating LIKE CONCAT('%', :search, '%')")
+                        "books.author LIKE CONCAT('%', :search, '%')")
 
                         .bind("search", search)
                         .mapToBean(CheckInOutHistory.class)
@@ -121,6 +113,7 @@ public class CheckInOutHistoryService extends DatabaseService {
         jdbi.useHandle(handle ->
                 handle.createUpdate("UPDATE check_in_out_history SET returned = 1, returnCondition = :returnCondition " +
                         "WHERE id = :id")
+                        .bind("id", record.getId())
                         .bind("returnCondition", record.getReturnCondition())
                         .execute()
         );

@@ -103,8 +103,8 @@
                             <td th:text="${record.book.title} + ', ' + ${record.book.author}"></td>
                             <td th:text="${record.checkOutDate.format(model.dateTimeFormatter)}"></td>
                             <td th:text="${record.checkOutDate.plusDays(record.daysUntilDueBack).format(model.dateTimeFormatter)}"></td>
-                            <td><a th:href="'/check-in-out-history/records-edit/' + ${record.id}">
-                                <button class="editrecord"><span>Edit</span></button>
+                            <td><a th:href="'/check-in-out-history/check-in/' + ${record.id}">
+                                <button class="checkinrecord"><span>Check In Book</span></button>
                             </a></td>
                             <td><a th:href="'/check-in-out-history/record-delete/' + ${record.id}">
                                 <button class="deleterecord"><span>Delete</span></button>
