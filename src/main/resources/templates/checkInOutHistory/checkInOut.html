@@ -35,8 +35,8 @@
                 <form th:action = "@{/check-in-out-history/record-add/added}" method="POST">
                     <div class="add-book-row">
                         <label>
-                            <span>Member ID </span>
-                            <input type="text" name="member.id" th:value="${model.member.id}"> <!-- THIS IS WHERE I NEED HELP! -->
+                            <span th:text="'Member: ' + ${model.member.firstName} + ' ' + ${model.member.middleName} + ' ' + ${model.member.surname}"></span>
+                            <input type="hidden" name="member.id" th:value="${model.member.id}">
                         </label>
                     </div>
                     <div class="add-book-row">
@@ -61,9 +61,9 @@
                     <a href="/check-in-out-history"> Cancel </a>
                 </form>
 
-            </div>
+            </div> <br>
             <!-- LIST Members books -->
-            <section class="allbooks-section">
+            <section th:if="${model.memberRecords.size() > 0}" class="allbooks-section">
                 <div class="allbooks-container">
                     <table class="allbooks really-allbooks table table-bordered table-striped">
                         <thead>
@@ -124,6 +124,9 @@
                     </table>
                 </div>
             </section>
+            <div th:unless="${model.memberRecords.size() > 0}">
+                <p>No Records For This Member</p>
+            </div>
         </div>
     </div>
 </body>
