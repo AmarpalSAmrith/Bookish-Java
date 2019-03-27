@@ -9,24 +9,28 @@
     <link rel="stylesheet" href="/styles/general.css"/>
     <link rel="stylesheet" href="/styles/navbar.css"/>
     <link rel="stylesheet" href="/styles/books.css"/>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
         function setActiveItemInNav(id) {
             $('#' + id).addClass("active");
         }
 
-        $(document).ready(function() { setActiveItemInNav("nav-books"); });
+        $(document).ready(function () {
+            setActiveItemInNav("nav-books");
+        });
     </script>
 
 </head>
 
-    <body>
-        <div th:replace="fragments/navbar :: navbar">
-            <!-- This element is replaced by the HTML in fragments/navbar.html -->
-        </div>
+<body>
+<div th:replace="fragments/navbar :: navbar">
+    <!-- This element is replaced by the HTML in fragments/navbar.html -->
+</div>
 
-        <div class="container">
-        <form th:action = "@{/books/books-add/added}" method="POST">
+<div class="container">
+    <div class="form-container">
+        <form th:action="@{/books/books-add/added}" method="POST">
             <div class="add-book-row">
                 <label>
                     <span>Title </span>
@@ -66,9 +70,9 @@
             <input type="submit" value="Add Book"/>
             <a href="/books"> Cancel </a>
         </form>
-
-        </div>
-    </body>
+    </div>
+</div>
+</body>
 
 <footer>
     <pa>The Library of Books and Stuff. Copyright &copy; 2019</pa>

@@ -1,5 +1,5 @@
 .add-member-row label {
-    color: white;
+    color: black;
 }
 
 .list-buttons-container {
@@ -44,6 +44,14 @@
     flex-grow: 1;
 }
 
-.editmemberbutton {
+.form-container {
+    margin-top: 15px;
+    background-color: #e9ecef;
+    width: fit-content;
+    display: flex;
+    text-align: right;
+    align-items: flex-end;
+    justify-content: left;
+    padding: 12px;
 
 }
