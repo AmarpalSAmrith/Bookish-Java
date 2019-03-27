@@ -71,7 +71,7 @@
                 <td th:text="${book.isbn}"></td>
                 <td th:text="${book.genre}"></td>
                 <td th:text="${book.ageRating}"></td>
-                <td th:text="${book.numberOfCopies}"></td>
+                <td th:text="${book.availableCopies + ' of ' + book.numberOfCopies}"></td>
                 <td><a th:href="'/books/books-edit/' + ${book.id}">
                     <button class="editbookbutton"><span>Edit</span></button>
                 </a></td>

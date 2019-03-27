@@ -10,7 +10,11 @@ import java.util.Optional;
 public class BookService extends DatabaseService {
     public List<Books> getAllBooks() {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT * FROM books WHERE applicable = 1")
+                handle.createQuery("SELECT books.*, books.number_of_copies - SUM(IF(check_in_out_history.returned = 0, 1, 0)) AS available_copies " +
+                        "FROM books " +
+                        "LEFT JOIN check_in_out_history ON books.id = check_in_out_history.book_id " +
+                        "WHERE check_in_out_history.applicable = 1 AND books.applicable = 1 " +
+                        "GROUP BY books.id")
                         .mapToBean(Books.class)
                         .list()
         );
