@@ -25,5 +25,9 @@ nav {
 }
 
 .navbar-item.active {
-    background-color: #4CAF50;
+    color: white;
+}
+
+#nav-home {
+
 }
