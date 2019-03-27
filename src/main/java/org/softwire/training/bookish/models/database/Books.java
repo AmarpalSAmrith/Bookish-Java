@@ -9,6 +9,7 @@ public class Books {
     String genre;
     int ageRating;
     int numberOfCopies;
+    int availableCopies;
     boolean applicable;
 
     public boolean isApplicable() {
@@ -73,5 +74,13 @@ public class Books {
 
     public void setNumberOfCopies(int numberOfCopies) {
         this.numberOfCopies = numberOfCopies;
+    }
+
+    public int getAvailableCopies() {
+        return availableCopies;
+    }
+
+    public void setAvailableCopies(int availableCopies) {
+        this.availableCopies = availableCopies;
     }
 }
