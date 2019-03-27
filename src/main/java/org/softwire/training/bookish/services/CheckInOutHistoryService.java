@@ -79,18 +79,14 @@ public class CheckInOutHistoryService extends DatabaseService {
     }
     public List<CheckInOutHistory> getRecordsForMember(int memberid) {
         return jdbi.withHandle(handle ->
-                handle.createQuery("SELECT check_in_out_history.id AS 'Check out ID', " +
-                        "CONCAT(members.first_name, ' ', middle_name, ' ', surname) AS 'Name', " +
-                        "floor(datediff(CURDATE(),birth_date) / 365) AS 'Age', " +
-                        "title AS 'Book Title', DATE_FORMAT(check_out_date,'%d/%m/%Y') AS 'Date Checked out', " +
-                        "DATE_FORMAT(DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY),'%d/%m/%Y') AS 'Date Due Back', " +
-                            "IF(returned = 1, 'Returned', " +
-                            "IF(DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY) = CURDATE(),'Due Today'," +
-                            "IF(returned = 0 AND DATE_ADD(check_out_date, INTERVAL days_until_due_back DAY) > CURDATE(), 'Not Due Yet', 'OverDue')))  AS 'Book Status' " +
+                handle.createQuery("SELECT check_in_out_history.*, " +
+                        "books.title AS book_title, books.author AS book_author, books.genre AS book_genre,  " +
+                        "members.first_name AS members_first_name, members.middle_name AS members_middle_name, " +
+                        "members.surname AS members_surname, members.birth_date AS members_birth_date, members.post_code AS members_post_code " +
                         "FROM check_in_out_history " +
-                            "LEFT JOIN books ON books.id = check_in_out_history.book_id " +
-                            "LEFT JOIN members ON members.id = check_in_out_history.member_id " +
-                        "WHERE check_in_out_history.applicable = 1 AND member_id = :id")
+                        "JOIN books ON check_in_out_history.book_id = books.id " +
+                        "JOIN members ON check_in_out_history.member_id = members.id " +
+                        "WHERE check_in_out_history.applicable = 1 AND members.id = :id")
                         .bind("id", memberid)
                         .mapToBean(CheckInOutHistory.class)
                         .list()
