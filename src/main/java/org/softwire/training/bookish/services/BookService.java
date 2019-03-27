@@ -1,6 +1,7 @@
 package org.softwire.training.bookish.services;
 
 import org.softwire.training.bookish.models.database.Books;
+import org.softwire.training.bookish.models.database.Members;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +64,20 @@ public class BookService extends DatabaseService {
                         .bind("ageRating", books.getAgeRating())
                         .bind("numberOfCopies", books.getNumberOfCopies())
                         .execute()
+        );
+    }
+    public List<Books> getBooksThatMatch(String search) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM books WHERE " +
+                        "title LIKE CONCAT('%', :search '%') OR " +
+                        "author LIKE CONCAT('%', :search, '%') OR " +
+                        "isbn LIKE CONCAT('%', :search, '%') OR " +
+                        "genre LIKE CONCAT('%', :search, '%') OR " +
+                        "age_rating LIKE CONCAT('%', :search, '%')")
+
+                        .bind("search", search)
+                        .mapToBean(Books.class)
+                        .list()
         );
     }
 }
