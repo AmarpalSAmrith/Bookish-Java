@@ -101,7 +101,7 @@ public class CheckInOutHistoryService extends DatabaseService {
                         "WHERE members.first_name LIKE CONCAT('%', :search '%') OR " +
                         "members.middle_name LIKE CONCAT('%', :search, '%') OR " +
                         "members.surname LIKE CONCAT('%', :search, '%') OR " +
-                        "books.title LIKE CONCAT('%', :search, '%') OR" +
+                        "books.title LIKE CONCAT('%', :search, '%') OR " +
                         "books.author LIKE CONCAT('%', :search, '%')")
                         .bind("search", search)
                         .mapToBean(CheckInOutHistory.class)
